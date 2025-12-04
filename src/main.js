@@ -1,4 +1,7 @@
+import './style.css';  // <-- Add this line
+
 document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('canvas-container');
 
     const scene = new THREE.Scene();
@@ -98,3 +101,5 @@ document.addEventListener('DOMContentLoaded', () => {
         renderer.setSize(window.innerWidth, window.innerHeight);
     });
 });
+});
+
