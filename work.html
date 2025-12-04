@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soumil - Work</title>
+    <script type="module" src="/src/work.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet"
+    >
+</head>
+
+<body class="bg-black text-white font-inter overflow-x-hidden h-screen w-screen antialiased">
+
+    <!-- LEFT VERTICAL NAV -->
+    <nav class="fixed left-0 top-0 h-full w-16 bg-black z-40 flex flex-col items-center border-r border-white/10">
+        <a href="/" class="nav-item group flex justify-center items-center py-8">
+            <span class="vertical-text text-gray-500 group-hover:text-white transition-colors duration-300 tracking-widest text-xs font-semibold">
+                HOME
+            </span>
+        </a>
+        
+        <div class="flex-1 flex flex-col gap-14 pt-10">
+            <a href="/work.html" class="nav-item active bg-red w-full flex justify-center items-center py-8">
+                <span class="vertical-text text-white font-bold tracking-widest text-xs">
+                    WORK
+                </span>
+            </a>
+            <a href="#" class="nav-item group flex justify-center items-center">
+                <span class="vertical-text text-gray-500 group-hover:text-white transition-colors duration-300 tracking-widest text-xs font-semibold">
+                    ABOUT
+                </span>
+            </a>
+            <a href="#" class="nav-item group flex justify-center items-center">
+                <span class="vertical-text text-gray-500 group-hover:text-white transition-colors duration-300 tracking-widest text-xs font-semibold">
+                    CONTACT
+                </span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- MAIN 50/50 SPLIT -->
+    <main class="ml-16 h-screen flex">
+
+        <!-- LEFT HALF: PROJECT LIST -->
+        <section class="w-1/2 flex items-center pl-10 md:pl-16">
+            <div class="flex flex-col gap-3 overflow-y-auto max-h-[80vh] no-scrollbar w-full">
+
+                <div class="project-item animate-slide-in opacity-0" style="animation-delay: 0.1s">
+                    <div class="project-title">
+                        DIOR
+                    </div>
+                </div>
+
+                <div class="project-item animate-slide-in opacity-0" style="animation-delay: 0.2s">
+                    <div class="project-title">
+                        RENAULT
+                    </div>
+                </div>
+
+                <div class="project-item animate-slide-in opacity-0" style="animation-delay: 0.3s">
+                    <div class="project-title">
+                        BIOTHERM
+                    </div>
+                </div>
+
+                <div class="project-item animate-slide-in opacity-0" style="animation-delay: 0.4s">
+                    <div class="project-title">
+                        DIPTYQUE
+                    </div>
+                </div>
+
+                <div class="project-item animate-slide-in opacity-0" style="animation-delay: 0.5s">
+                    <div class="project-title">
+                        CHANEL
+                    </div>
+                </div>
+
+                <div class="project-item animate-slide-in opacity-0" style="animation-delay: 0.6s">
+                    <div class="project-title">
+                        MOLYVA
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- RIGHT HALF: RED PANEL + THREE.JS -->
+        <section class="w-1/2 relative bg-red-panel">
+            <div id="canvas-container" class="absolute inset-0"></div>
+        </section>
+
+    </main>
+
+</body>
+</html>

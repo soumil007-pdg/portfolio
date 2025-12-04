@@ -1,98 +1,75 @@
-import './style.css';  // <-- Add this line
+import './style.css';
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-  document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('canvas-container');
+    if (!container) return;
 
+    // SCENE SETUP
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x000000, 0.01); 
-    scene.background = new THREE.Color(0x000000);
+    scene.background = new THREE.Color(0x050505); 
+    scene.fog = new THREE.FogExp2(0x050505, 0.02);
 
-    const camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 6;
-    camera.position.y = 0;
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 8; 
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.shadowMap.enabled = true;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
     container.appendChild(renderer.domElement);
 
-    const tunnelGroup = new THREE.Group();
-    scene.add(tunnelGroup);
-
-    const segments = 60;
-    const segmentDepth = 1.5;
-    const tunnelWidth = 8;
-    const tunnelHeight = 4.5;
-
-    const tunnelMat = new THREE.MeshBasicMaterial({
-        color: 0xff0000,
-        side: THREE.BackSide,
-        transparent: true,
-        opacity: 0.25,
-        wireframe: false
+    // MARBLE BUST
+    const marbleMat = new THREE.MeshStandardMaterial({ 
+        color: 0xffffff, roughness: 0.4, metalness: 0.1 
     });
 
-    const wireMat = new THREE.MeshBasicMaterial({
-        color: 0xff3333,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.5
+    const loader = new GLTFLoader();
+    loader.load('/bust.glb', (gltf) => {
+        const model = gltf.scene;
+        model.traverse((child) => {
+            if (child.isMesh) { child.material = marbleMat; child.castShadow = true; child.receiveShadow = true; }
+        });
+        const box = new THREE.Box3().setFromObject(model);
+        const scale = 5 / box.getSize(new THREE.Vector3()).length();
+        model.scale.set(scale, scale, scale);
+        model.position.y = -2;
+        scene.add(model);
+    }, undefined, () => {
+        // Fallback
+        scene.add(new THREE.Mesh(new THREE.TorusKnotGeometry(1, 0.4, 100, 16), marbleMat));
     });
 
-    const tunnelGeo = new THREE.BoxGeometry(tunnelWidth, tunnelHeight, segmentDepth);
+    // LIGHTING
+    const mainSpot = new THREE.SpotLight(0xff0000, 40);
+    mainSpot.position.set(0, 2, 12);
+    mainSpot.angle = Math.PI / 6; mainSpot.penumbra = 0.5; mainSpot.castShadow = true;
+    scene.add(mainSpot);
+    scene.add(mainSpot.target);
 
-    for (let i = 0; i < segments; i++) {
-        const zPos = -i * segmentDepth;
-        
-        const segment = new THREE.Mesh(tunnelGeo, tunnelMat);
-        segment.position.set(0, 0, zPos);
-        tunnelGroup.add(segment);
+    const rimLight = new THREE.SpotLight(0x00ffff, 5);
+    rimLight.position.set(-10, 5, -5);
+    scene.add(rimLight);
 
-        const wire = new THREE.Mesh(tunnelGeo, wireMat);
-        wire.position.set(0, 0, zPos);
-        tunnelGroup.add(wire);
-    }
-
-    const figureGeo = new THREE.CapsuleGeometry(0.2, 0.8, 4, 8);
-    const figureMat = new THREE.MeshBasicMaterial({ color: 0x330000 }); 
-    const figure = new THREE.Mesh(figureGeo, figureMat);
-    figure.position.set(0, -1.5, -6);
-    scene.add(figure);
-
-    let time = 0;
-    let mouseX = 0;
-    let mouseY = 0;
+    // ANIMATION
+    let mouseX = 0; let mouseY = 0;
     const windowHalfX = window.innerWidth / 2;
     const windowHalfY = window.innerHeight / 2;
 
     document.addEventListener('mousemove', (event) => {
-        mouseX = (event.clientX - windowHalfX) / 500;
-        mouseY = (event.clientY - windowHalfY) / 500;
+        mouseX = (event.clientX - windowHalfX) / windowHalfX;
+        mouseY = (event.clientY - windowHalfY) / windowHalfY;
     });
 
     function animate() {
         requestAnimationFrame(animate);
-        time += 0.01;
-
-        const speed = 0.3;
-        tunnelGroup.children.forEach(child => {
-            child.position.z += speed;
-            if (child.position.z > 7) {
-                child.position.z -= segments * segmentDepth;
-            }
-        });
-
-        camera.position.x += (mouseX - camera.position.x) * 0.05;
-        camera.position.y += (-mouseY - camera.position.y) * 0.05;
-        camera.lookAt(0, 0, -20);
-
-        const pulse = 0.25 + Math.sin(time * 2) * 0.08;
-        tunnelMat.opacity = pulse;
-
+        mainSpot.position.x += (mouseX * 5 - mainSpot.position.x) * 0.1;
+        mainSpot.position.y += (-mouseY * 5 - mainSpot.position.y) * 0.1;
+        mainSpot.lookAt(0,0,0);
         renderer.render(scene, camera);
     }
-
     animate();
 
     window.addEventListener('resize', () => {
@@ -101,5 +78,3 @@ document.addEventListener('DOMContentLoaded', () => {
         renderer.setSize(window.innerWidth, window.innerHeight);
     });
 });
-});
-

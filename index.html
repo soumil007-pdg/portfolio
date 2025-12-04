@@ -3,26 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Soumil - Creative Developer Portfolio</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <title>Soumil - Creative Developer</title>
     <script type="module" src="/src/main.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body class="bg-black text-white font-inter overflow-hidden h-screen w-screen antialiased">
-    <nav class="sidebar fixed left-0 top-0 h-full w-15 z-10 flex flex-col items-center pt-10">
-        <a href="#" class="nav-item active text-white no-underline text-xs font-semibold tracking-widest mb-10 opacity-70 transition-all duration-300 cursor-pointer">HOME</a>
-        <a href="#" class="nav-item text-white no-underline text-xs font-semibold tracking-widest mb-10 opacity-70 transition-all duration-300 cursor-pointer">WORK</a>
-        <a href="#" class="nav-item text-white no-underline text-xs font-semibold tracking-widest mb-10 opacity-70 transition-all duration-300 cursor-pointer">ABOUT</a>
-        <a href="#" class="nav-item text-white no-underline text-xs font-semibold tracking-widest mb-10 opacity-70 transition-all duration-300 cursor-pointer">CONTACT</a>
+
+    <nav class="fixed left-0 top-0 h-full w-16 bg-black z-40 flex flex-col items-center border-r border-white/10">
+        <a href="/" class="nav-item active bg-red w-full py-8 flex justify-center items-center group relative">
+            <span class="vertical-text text-white font-bold tracking-widest text-xs">HOME</span>
+        </a>
+        
+        <div class="flex-1 flex flex-col gap-14 pt-10">
+            <a href="/work.html" class="nav-item group flex justify-center items-center">
+                <span class="vertical-text text-gray-500 group-hover:text-white transition-colors duration-300 tracking-widest text-xs font-semibold">WORK</span>
+            </a>
+            <a href="#" class="nav-item group flex justify-center items-center">
+                <span class="vertical-text text-gray-500 group-hover:text-white transition-colors duration-300 tracking-widest text-xs font-semibold">ABOUT</span>
+            </a>
+            <a href="#" class="nav-item group flex justify-center items-center">
+                <span class="vertical-text text-gray-500 group-hover:text-white transition-colors duration-300 tracking-widest text-xs font-semibold">CONTACT</span>
+            </a>
+        </div>
     </nav>
 
     <div id="canvas-container" class="absolute inset-0 z-0"></div>
 
-    <div class="content-overlay absolute bottom-0 right-0 w-full h-full z-10 pointer-events-none flex flex-col justify-end p-10 pl-20 pb-5">
-        <div class="role-title text-right text-red uppercase text-sm md:text-lg font-bold tracking-wide -mb-1 mr-1">CREATIVE DEVELOPER</div>
-        <div class="big-name font-anton text-5xl md:text-8xl lg:text-9xl leading-tight text-red uppercase text-right whitespace-nowrap">SOUMIL</div>
-    </div>
+    <footer class="fixed bottom-0 left-0 w-full px-10 pb-8 pt-8 flex flex-col items-end justify-center border-t border-white/5 bg-black/80 backdrop-blur-sm md:bg-transparent md:backdrop-blur-none z-20 pointer-events-none">
+        <div class="text-red font-bold tracking-wider text-sm md:text-base lg:text-lg mb-2 mr-1 opacity-90">
+            CREATIVE DEVELOPER
+        </div>
+        <div class="font-anton text-[15vw] md:text-[12vw] leading-[0.8] text-red uppercase tracking-tighter select-none">
+            SOUMIL
+        </div>
+    </footer>
+
 </body>
 </html>
