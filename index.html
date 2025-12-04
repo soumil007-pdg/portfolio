@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soumil - Creative Developer Portfolio</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script type="module" src="/src/main.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Your full CSS—paste it all here, unchanged */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: #000; color: #fff; font-family: 'Inter', sans-serif; overflow: hidden; height: 100vh; width: 100vw; }
+        #canvas-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        .sidebar { position: fixed; left: 0; top: 0; height: 100%; width: 60px; z-index: 10; display: flex; flex-direction: column; align-items: center; padding-top: 40px; }
+        .nav-item { writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); color: #fff; text-decoration: none; font-size: 14px; font-weight: 600; letter-spacing: 2px; margin-bottom: 40px; opacity: 0.7; transition: all 0.3s ease; position: relative; cursor: pointer; }
+        .nav-item:hover { opacity: 1; color: #ff0000; }
+        .nav-item.active { background-color: #ff0000; color: #fff; padding: 15px 5px; opacity: 1; }
+        .content-overlay { position: absolute; bottom: 0; right: 0; width: 100%; height: 100%; z-index: 5; pointer-events: none; display: flex; flex-direction: column; justify-content: flex-end; padding: 40px; padding-left: 80px; padding-bottom: 20px; }
+        .role-title { text-align: right; color: #ff0000; font-size: clamp(1rem, 2vw, 1.5rem); font-weight: 700; letter-spacing: 1px; margin-bottom: -5px; font-family: 'Inter', sans-serif; text-transform: uppercase; margin-right: 5px; }
+        .big-name { font-family: 'Anton', sans-serif; font-size: clamp(3rem, 13vw, 9rem); line-height: 1; color: #ff0000; text-transform: uppercase; text-align: right; white-space: nowrap; text-shadow: 0 0 30px rgba(255, 0, 0, 0.6); }
+        @media (max-width: 768px) { .sidebar { width: 40px; padding-top: 20px; } .content-overlay { padding: 20px; padding-left: 50px; padding-bottom: 40px; } .big-name { white-space: normal; word-break: break-word; line-height: 0.9; } }
+    </style>
+</head>
+<body>
+    <nav class="sidebar">
+        <a href="#" class="nav-item active">HOME</a>
+        <a href="#" class="nav-item">WORK</a>
+        <a href="#" class="nav-item">ABOUT</a>
+        <a href="#" class="nav-item">CONTACT</a>
+    </nav>
+    <div id="canvas-container"></div>
+    <div class="content-overlay">
+        <div class="role-title">CREATIVE DEVELOPER</div>
+        <div class="big-name">SOUMIL</div>
+    </div>
+</body>
+</html>
